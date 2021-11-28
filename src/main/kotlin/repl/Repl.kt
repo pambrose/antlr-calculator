@@ -6,11 +6,7 @@ import java.io.Writer
 import java.util.*
 
 class Repl(input: Reader, private val calculator: Calculator, private val output: Writer) {
-  private val scanner: Scanner
-
-  init {
-    scanner = Scanner(input as Readable)
-  }
+  private val scanner: Scanner = Scanner(input as Readable)
 
   fun start() {
     while (true) {

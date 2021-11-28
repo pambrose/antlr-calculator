@@ -32,6 +32,9 @@ expression
    | left=expression operator=(ADD|SUB) right=expression  # AdditionOrSubtraction
    ;
 
+/*
+ * Tokens (terminal)
+ */
 POW: '^';
 MUL: '*';
 DIV: '/';
