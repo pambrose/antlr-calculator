@@ -1,0 +1,61 @@
+plugins {
+    id 'java'
+    id 'antlr'
+    id 'org.jetbrains.kotlin.jvm' version '1.6.0'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+group 'com.github.pambrose'
+version '1.0-SNAPSHOT'
+
+configurations {
+    compile {
+        extendsFrom = extendsFrom.findAll { it != configurations.antlr }
+    }
+}
+
+dependencies {
+    antlr "org.antlr:antlr4:$antlr4_version"
+    compile "org.antlr:antlr4-runtime:$antlr4_version"
+}
+
+generateGrammarSource {
+    maxHeapSize = "64m"
+    arguments += ["-visitor", "-listener", "-long-messages"]
+}
+
+compileKotlin {
+    kotlinOptions {
+        useIR = true
+        jvmTarget = '1.8'
+    }
+    dependsOn generateGrammarSource
+}
+
+clean.doLast {
+    file('generated-src').deleteDir()
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    testImplementation "io.kotest:kotest-runner-junit5:$kotest_version"
+    testImplementation "io.kotest:kotest-assertions-core:$kotest_version"
+}
+
+test {
+    useJUnitPlatform()
+
+    testLogging {
+        events "passed", "skipped", "failed", "standardOut", "standardError"
+        exceptionFormat "full"
+        showStandardStreams = true
+    }
+}
