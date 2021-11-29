@@ -5,7 +5,7 @@ import CalculatorParser
 import java.util.*
 
 
-class CalculationListener : CalculatorBaseListener() {
+class CalculationListener(val symbolTable: MutableMap<String, Double>) : CalculatorBaseListener() {
   /**
    * A stack is used to track what numbers
    * we have seen last. This is our only
@@ -19,6 +19,19 @@ class CalculationListener : CalculatorBaseListener() {
    */
   private val stack = Stack<Double>()
 
+  override fun exitAssign(ctx: CalculatorParser.AssignContext) {
+    val variableName = ctx.VARIABLE().text
+    val number = stack.pop()
+    symbolTable[variableName] = number
+    stack.push(number)
+  }
+
+  override fun exitVariable(ctx: CalculatorParser.VariableContext) {
+    val variableName = ctx.VARIABLE().text
+    val number = symbolTable[variableName] ?: error("Variable $variableName is not defined")
+    stack.push(number)
+  }
+
   override fun exitNumber(ctx: CalculatorParser.NumberContext) {
     val number = ctx.NUMBER().text.toDouble()
     stack.push(number)
@@ -28,6 +41,12 @@ class CalculationListener : CalculatorBaseListener() {
     val right = stack.pop()
     val left = stack.pop()
     stack.push(Math.pow(left, right))
+  }
+
+  override fun exitModulo(ctx: CalculatorParser.ModuloContext?) {
+    val right = stack.pop()
+    val left = stack.pop()
+    stack.push(left % right)
   }
 
   override fun exitMultiplicationOrDivision(ctx: CalculatorParser.MultiplicationOrDivisionContext) {

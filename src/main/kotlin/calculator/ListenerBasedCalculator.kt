@@ -12,13 +12,15 @@ import parser.CalculationListener
 
 
 class ListenerBasedCalculator : Calculator {
-  override fun calculate(input: String): Double {
+  private val symbolTable = mutableMapOf<String, Double>()
+
+  override fun eval(input: String): Double {
     val chars: CharStream = CharStreams.fromString(input)
     val lexer: Lexer = CalculatorLexer(chars)
     val tokens = CommonTokenStream(lexer)
     val parser = CalculatorParser(tokens)
     val tree: ParseTree = parser.start()
-    val calculator = CalculationListener()
+    val calculator = CalculationListener(symbolTable)
     val walker = ParseTreeWalker()
     walker.walk(calculator, tree)
     return calculator.result

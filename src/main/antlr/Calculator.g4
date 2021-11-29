@@ -1,6 +1,9 @@
 grammar Calculator;
 
-start : expression;
+start
+    : expression
+    | assignment
+    ;
 
 /*
  * The order in which expressions are evaluated
@@ -25,20 +28,30 @@ start : expression;
  * allowing for even more fine-grained control.
  */
 expression
-   : NUMBER                                               # Number
-   | '(' inner=expression ')'                             # Parentheses
-   | left=expression operator=POW right=expression        # Power
-   | left=expression operator=(MUL|DIV) right=expression  # MultiplicationOrDivision
-   | left=expression operator=(ADD|SUB) right=expression  # AdditionOrSubtraction
-   ;
+    returns [Double retval]
+    : NUMBER                                               # Number
+    | VARIABLE                                             # Variable
+    | '(' inner=expression ')'                             # Parentheses
+    | left=expression operator=POW right=expression        # Power
+    | left=expression operator=MOD right=expression        # Modulo
+    | left=expression operator=(MUL|DIV) right=expression  # MultiplicationOrDivision
+    | left=expression operator=(ADD|SUB) right=expression  # AdditionOrSubtraction
+    ;
+
+assignment
+    : left=VARIABLE EQUAL right=expression                 # Assign
+    ;
 
 /*
  * Tokens (terminal)
  */
-POW: '^';
-MUL: '*';
-DIV: '/';
-ADD: '+';
-SUB: '-';
-NUMBER: '-'?[0-9]+;
-WHITESPACE: [ \r\n\t]+ -> skip;
+POW: '^' ;
+MOD: '%' ;
+MUL: '*' ;
+DIV: '/' ;
+ADD: '+' ;
+SUB: '-' ;
+EQUAL: '=' ;
+NUMBER: '-'?[0-9]+ ;
+VARIABLE: ([a-z] | [A-Z]) ([a-z] | [A-Z] | [0-9])* ;
+WHITESPACE: [ \r\n\t]+ -> skip ;
