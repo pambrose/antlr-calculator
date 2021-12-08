@@ -1,5 +1,7 @@
 # Kotlin Antlr Calculator
 
+## ANTLR (ANother Tool for Language Recognition)
+
 ## Relevant Links
 
 * [Maven-based Antlr Calculator](https://github.com/arothuis/antlr4-calculator)
