@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'antlr'
+    id 'org.jmailen.kotlinter' version "3.7.0"
     id 'org.jetbrains.kotlin.jvm' version '1.6.10-RC'
     id "com.github.ben-manes.versions" version '0.39.0'
 }
@@ -27,9 +28,14 @@ generateGrammarSource {
     arguments += ["-visitor", "-listener", "-long-messages"]
 }
 
+// kotlinter requires this
+lintKotlinMain {
+    dependsOn(generateGrammarSource)
+}
+
 compileKotlin {
     kotlinOptions {
-        useIR = true
+        // useIR = true
         jvmTarget = '1.8'
     }
     dependsOn generateGrammarSource
@@ -41,6 +47,7 @@ clean.doLast {
 
 repositories {
     mavenLocal()
+    google()
     mavenCentral()
 }
 
@@ -59,4 +66,12 @@ test {
         exceptionFormat "full"
         showStandardStreams = true
     }
+}
+
+kotlinter {
+    ignoreFailures = false
+    indentSize = 2
+    reporters = ['checkstyle', 'plain']
+    experimentalRules = false
+    disabledRules = ["no-wildcard-imports", "indent", "final-newline", "comment-spacing", "max-line-length", "no-multi-spaces"]
 }

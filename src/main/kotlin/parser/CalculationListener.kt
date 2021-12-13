@@ -4,7 +4,6 @@ import CalculatorBaseListener
 import CalculatorParser
 import java.util.*
 
-
 class CalculationListener(val symbolTable: MutableMap<String, Double>) : CalculatorBaseListener() {
   /**
    * A stack is used to track what numbers

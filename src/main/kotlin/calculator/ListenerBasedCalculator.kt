@@ -10,7 +10,6 @@ import org.antlr.v4.runtime.tree.ParseTree
 import org.antlr.v4.runtime.tree.ParseTreeWalker
 import parser.CalculationListener
 
-
 class ListenerBasedCalculator : Calculator {
   private val symbolTable = mutableMapOf<String, Double>()
 

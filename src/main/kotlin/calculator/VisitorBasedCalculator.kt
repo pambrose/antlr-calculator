@@ -9,7 +9,6 @@ import org.antlr.v4.runtime.Lexer
 import org.antlr.v4.runtime.tree.ParseTree
 import parser.CalculationVisitor
 
-
 class VisitorBasedCalculator : Calculator {
   private val symbolTable = mutableMapOf<String, Double>()
 
