@@ -1,9 +1,9 @@
 plugins {
     id 'java'
     id 'antlr'
-    id 'org.jmailen.kotlinter' version "3.8.0"
-    id 'org.jetbrains.kotlin.jvm' version '1.6.10'
-    id "com.github.ben-manes.versions" version '0.41.0'
+    id 'org.jmailen.kotlinter' version "3.10.0"
+    id 'org.jetbrains.kotlin.jvm' version '1.6.20'
+    id "com.github.ben-manes.versions" version '0.42.0'
 }
 
 sourceCompatibility = 1.8
@@ -70,7 +70,7 @@ test {
 
 kotlinter {
     ignoreFailures = false
-    indentSize = 2
+    //indentSize = 2
     reporters = ['checkstyle', 'plain']
     experimentalRules = false
     disabledRules = ["no-wildcard-imports", "indent", "final-newline", "comment-spacing", "max-line-length", "no-multi-spaces"]
