@@ -10,7 +10,7 @@ plugins {
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-group 'com.github.pambrose.calc'
+group 'com.github.pambrose.antlr-calculator'
 version '1.0.0'
 
 configurations {
