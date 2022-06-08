@@ -1,9 +1,7 @@
 import calculator.*
 import io.kotest.core.spec.style.*
 import io.kotest.matchers.*
-import kotlin.time.*
 
-@OptIn(ExperimentalTime::class)
 class CalculatorTest : StringSpec(
   {
     val calculators = listOf(ListenerBasedCalculator(), VisitorBasedCalculator())
@@ -14,16 +12,6 @@ class CalculatorTest : StringSpec(
           calculator.eval(value.toString()) shouldBe value
         }
       }
-    }
-
-    "RawCompute" {
-      val calc = VisitorBasedCalculator()
-      measureTime {
-        (1..1000000).forEach {
-          val eq = "$it*/$it"
-          calc.eval(eq).also { println("$eq = $it") }
-        }
-      }.also { println("Total time: $it") }
     }
 
     "Addition" {

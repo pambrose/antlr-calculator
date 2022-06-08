@@ -52,6 +52,7 @@ DIV: '/' ;
 ADD: '+' ;
 SUB: '-' ;
 EQUAL: '=' ;
-NUMBER: '-'?[0-9]+ ;
+//NUMBER: '-'?[0-9]+ ;
+NUMBER: [0-9]+ ;
 VARIABLE: ([a-z] | [A-Z]) ([a-z] | [A-Z] | [0-9])* ;
 WHITESPACE: [ \r\n\t]+ -> skip ;
