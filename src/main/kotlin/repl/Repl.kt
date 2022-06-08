@@ -1,10 +1,7 @@
 package repl
 
-import calculator.Calculator
-import java.io.InputStreamReader
-import java.io.PrintWriter
-import java.io.Reader
-import java.io.Writer
+import calculator.*
+import java.io.*
 import java.util.*
 
 class Repl(

@@ -2,11 +2,8 @@ package calculator
 
 import CalculatorLexer
 import CalculatorParser
-import org.antlr.v4.runtime.CharStream
-import org.antlr.v4.runtime.CharStreams
-import org.antlr.v4.runtime.CommonTokenStream
-import org.antlr.v4.runtime.Lexer
-import org.antlr.v4.runtime.tree.ParseTree
+import org.antlr.v4.runtime.*
+import org.antlr.v4.runtime.tree.*
 
 interface Calculator {
   fun eval(input: String): Double
@@ -15,7 +12,10 @@ interface Calculator {
     val chars: CharStream = CharStreams.fromString(input)
     val lexer: Lexer = CalculatorLexer(chars)
     val tokens = CommonTokenStream(lexer)
-    val parser = CalculatorParser(tokens)
-    return parser.start()
+    return CalculatorParser(tokens)
+      .run {
+        errorHandler = BailErrorStrategy()
+        start()
+      }
   }
 }
