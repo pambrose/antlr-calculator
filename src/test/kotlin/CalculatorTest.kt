@@ -1,6 +1,7 @@
-import calculator.*
-import io.kotest.core.spec.style.*
-import io.kotest.matchers.*
+import calculator.ListenerBasedCalculator
+import calculator.VisitorBasedCalculator
+import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.shouldBe
 
 class CalculatorTest : StringSpec(
   {
@@ -80,4 +81,5 @@ class CalculatorTest : StringSpec(
         }
       }
     }
-  })
+  }
+)
