@@ -4,7 +4,6 @@ import CalculatorBaseVisitor
 import CalculatorParser
 
 class CalculationVisitor(val symbolTable: MutableMap<String, Double>) : CalculatorBaseVisitor<Double>() {
-
   override fun visitAssign(ctx: CalculatorParser.AssignContext): Double {
     val variableName = ctx.VARIABLE().text
     val number = visit(ctx.right)

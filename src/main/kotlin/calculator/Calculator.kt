@@ -3,7 +3,7 @@ package calculator
 import CalculatorLexer
 import CalculatorParser
 import org.antlr.v4.runtime.*
-import org.antlr.v4.runtime.tree.*
+import org.antlr.v4.runtime.tree.ParseTree
 
 interface Calculator {
   fun eval(input: String): Double

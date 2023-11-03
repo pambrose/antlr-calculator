@@ -81,5 +81,5 @@ class CalculatorTest : StringSpec(
         }
       }
     }
-  }
+  },
 )

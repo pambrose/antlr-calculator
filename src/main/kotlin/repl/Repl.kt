@@ -1,13 +1,16 @@
 package repl
 
-import calculator.*
-import java.io.*
+import calculator.Calculator
+import java.io.InputStreamReader
+import java.io.PrintWriter
+import java.io.Reader
+import java.io.Writer
 import java.util.*
 
 class Repl(
   private val calculator: Calculator,
   input: Reader = InputStreamReader(System.`in`),
-  private val output: Writer = PrintWriter(System.out)
+  private val output: Writer = PrintWriter(System.out),
 ) {
   private val scanner: Scanner = Scanner(input as Readable)
 
