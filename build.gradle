@@ -2,13 +2,11 @@ plugins {
     id 'java'
     id 'maven-publish'
     id 'antlr'
-    id 'org.jetbrains.kotlin.jvm' version '1.9.20'
-    id 'org.jmailen.kotlinter' version "4.0.0"
-    id "com.github.ben-manes.versions" version '0.49.0'
+    id 'org.jetbrains.kotlin.jvm' version '2.1.0'
+//    id 'org.jmailen.kotlinter' version "5.0.1"
+    id "com.github.ben-manes.versions" version '0.51.0'
 }
 
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
 
 group 'com.github.pambrose.antlr-calculator'
 version '1.0.0'
@@ -30,9 +28,9 @@ generateGrammarSource {
 }
 
 // kotlinter requires this
-lintKotlinMain {
-    dependsOn(generateGrammarSource)
-}
+//lintKotlinMain {
+//    dependsOn(generateGrammarSource)
+//}
 
 kotlin {
     jvmToolchain(17)
@@ -47,7 +45,6 @@ clean.doLast {
 }
 
 repositories {
-    mavenLocal()
     google()
     mavenCentral()
 }
@@ -85,7 +82,7 @@ test {
     }
 }
 
-kotlinter {
-    ignoreFailures = false
-    reporters = ['checkstyle', 'plain']
-}
+//kotlinter {
+//    ignoreFailures = false
+//    reporters = ['checkstyle', 'plain']
+//}

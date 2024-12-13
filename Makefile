@@ -6,13 +6,11 @@ stop:
 clean:
 	./gradlew clean
 
-compile:
+build: clean
 	./gradlew build -xtest
 
 scan:
 	./gradlew build --scan -xtest
-
-build: compile
 
 uberjar:
 	./gradlew uberjar
@@ -40,4 +38,4 @@ depends:
 	./gradlew dependencies
 
 upgrade-wrapper:
-	./gradlew wrapper --gradle-version=8.4 --distribution-type=bin
+	./gradlew wrapper --gradle-version=8.11.1 --distribution-type=bin
